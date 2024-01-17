@@ -1,4 +1,6 @@
 fileignoreconfig:
 - filename: frontend/package-lock.json
-  checksum: 195c04d71f58d208c063bfeab5122e9bee19c3a4140d601eae31e9ef23708d2a
+  checksum: 4e0d5244fc5c278b89fb0e4465891d91fcc76c5ae3a356889a5e9c5e96fe38d6
+- filename: frontend/src/components/Table.js
+  checksum: 3571b88c69cc0da669bde98a0ca13d2e44a8f31b61c933ad6735cbee9a8afbaf
 version: "1.0"

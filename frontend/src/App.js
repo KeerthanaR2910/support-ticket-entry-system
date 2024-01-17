@@ -5,8 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import Header from "./components/Header";
-import CreateSupportAgent from './pages/SupportAgent';
-import ShowSupportTicket from './pages/SupportTicket';
+import CreateSupportAgent from './pages/CreateSupportAgent';
+import ShowSupportTicket from './pages/ShowSupportTickets'
 import CreateSupportTicket from './pages/CreateSupportTicket'
 
 function App() {

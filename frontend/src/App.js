@@ -5,18 +5,20 @@ import {
   Route,
 } from "react-router-dom";
 import Header from "./components/Header";
-import SupportAgent from './pages/SupportAgent';
-import SupportTicket from './pages/SupportTicket';
+import CreateSupportAgent from './pages/SupportAgent';
+import ShowSupportTicket from './pages/SupportTicket';
+import CreateSupportTicket from './pages/CreateSupportTicket'
 
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route index element={<SupportTicket />} />
-        <Route path="/support-tickets" element={<SupportTicket />} />
-        <Route path="/support-agents" element={<SupportAgent />} />
-      </Routes>
+        <Header />
+        <Routes>
+          <Route index element={<ShowSupportTicket />} />
+          <Route path="/support-tickets" element={<ShowSupportTicket />} />
+          <Route path="/new-support-agent" element={<CreateSupportAgent />} />
+          <Route path="/new-support-ticket" element={<CreateSupportTicket />} />
+        </Routes>
     </Router>
   );
 }

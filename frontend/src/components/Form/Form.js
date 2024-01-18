@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {toast} from 'react-toastify';
 import FormInput from "./FormInput";
+import FormSelect from "./FormSelect";
 
 const Form = ({fields, onSubmitHandler, submitButtonLabel, type}) => {
     const [disableSubmit, setDisableSubmit] = useState(false)
@@ -36,21 +37,11 @@ const Form = ({fields, onSubmitHandler, submitButtonLabel, type}) => {
             <div className="flex flex-col gap-y-4 justify-center w-fit h-full font-sans md:w-2/3">
                 {fields.map((field) => {
                     if (field.type === "select") {
-                        return (
-                            <div className="flex flex-col h-fit gap-y-2">
-                                <label className=" text-md font-medium">
-                                    {field.label}
-                                </label>
-                                <select
-                                    name={field.name}
-                                    defaultValue=""
-                                    onChange={(e) => inputChangeHandler(e)}
-                                    className="w-full bg-slate-300 border border-gray-200 text-gray-700 p-2 focus:outline-none focus:outline-gray-500 focus:bg-slate-50">
-                                    <option disabled></option>
-                                    {field.options.map((option) => <option value={option}>{option}</option>)}
-                                </select>
-                            </div>
-                        )
+                        return <FormSelect
+                            field={field}
+                            value={formData[field.name]}
+                            inputChangeHandler={inputChangeHandler}
+                        />
                     } else if (field.type === "input") {
                         return (
                             <FormInput

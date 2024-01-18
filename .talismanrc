@@ -9,6 +9,8 @@ fileignoreconfig:
   checksum: 3e4efe9b6f1e20718e239bfc7a672716a30153cfa5c6557a4a5f378509eb00f4
 - filename: frontend/src/components/Table.js
   checksum: 3571b88c69cc0da669bde98a0ca13d2e44a8f31b61c933ad6735cbee9a8afbaf
+- filename: frontend/src/components/Table/Table.js
+  checksum: a795fc4a7219bb70932ff176a8816d9c1a3a152951d3d8e43f74c5313ca7a9f0
 - filename: frontend/src/pages/ShowSupportTickets/index.js
   checksum: b3b1df56c7101998f50d054141ceb309e6e5c5d912d26f42d1b81d616c6eed9d
 - filename: frontend/src/utils/helper.js

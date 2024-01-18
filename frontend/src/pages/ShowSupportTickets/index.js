@@ -1,4 +1,4 @@
-import {Table} from "../../components/Table";
+import {Table} from "../../components/Table/Table";
 import {useEffect, useMemo, useState} from "react"
 import {Card, CardFooter, CardHeader} from "@material-tailwind/react";
 import PaginationBar from "../../components/PaginationBar";
@@ -127,6 +127,12 @@ const ShowSupportTicket = () => {
                 setRowsCount(responseJson.totalCount);
             })
     }, [sort,page,filters,resolve])
+
+
+    useEffect(()=> {setPage({
+        page: 1,
+        pageSize: 10
+    })},[filters])
 
     return (
         <div>

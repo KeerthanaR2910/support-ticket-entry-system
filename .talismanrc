@@ -5,4 +5,6 @@ fileignoreconfig:
   checksum: 3571b88c69cc0da669bde98a0ca13d2e44a8f31b61c933ad6735cbee9a8afbaf
 - filename: frontend/src/pages/ShowSupportTickets/index.js
   checksum: b3b1df56c7101998f50d054141ceb309e6e5c5d912d26f42d1b81d616c6eed9d
+- filename: frontend/src/utils/helper.js
+  checksum: 492523ea00009f6db8b148475343e17aeeba5d4e0bd6e0c78102aaf7f15ce6f8
 version: "1.0"

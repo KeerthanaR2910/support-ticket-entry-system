@@ -2,7 +2,12 @@ import {Typography} from "@material-tailwind/react";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 
 const PaginationBar = ({page: pageModel, totalRowsCount,setPage}) => {
-    const totalPages = Math.round(totalRowsCount/pageModel.pageSize)
+    let totalPages = Math.floor(totalRowsCount/pageModel.pageSize)
+    if(totalRowsCount % pageModel.pageSize != 0){
+        totalPages+=1;
+        console.log({totalPages},"ddd")
+    } 
+    if(totalRowsCount === 0) totalPages = 0
     const isFirst = pageModel.page === 1
     const isLast = pageModel.page === totalPages
 

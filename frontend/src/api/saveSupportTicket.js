@@ -7,12 +7,12 @@ const saveSupportTicket = async (data) => {
            },
            body: JSON.stringify(data)
        })
-        if (response.status !== 200) {
-            return new Error(response.statusText);
+        if (response.status === 200 || response.status === 201) {
+            return response.json();
         }
-        return response.json();
+        throw new Error(response);
     }catch (error) {
-        return new Error(error.message)
+        throw new Error(error)
     }
 }
 

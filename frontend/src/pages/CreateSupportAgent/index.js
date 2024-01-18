@@ -4,23 +4,32 @@ import Form from "../../components/Form";
 import saveSupportAgent from "../../api/saveSupportAgent";
 
 const CreateSupportAgent = () => {
-    const [responseBody, setResponseBody] = useState({});
-    const [saveStatus, setSaveStatus] = useState('None');
+    const [requestBody, setrequestBody] = useState({});
+    const [response, setResponse] = useState({
+        status:'None'
+    })
 
     const inputChangeHandler = (event) => {
-        const {id, value} = event.target
-        setResponseBody({...responseBody, [id]: value})
+        const {name, value} = event.target
+        setrequestBody({...requestBody, [name]: value})
     }
     
     const onSubmitHandler = async(event) => {
             event.preventDefault()
-            //TODO saveSupportAgent Api
-            saveSupportAgent(responseBody)
-            .then(() => {
-                setSaveStatus("Success")
+            saveSupportAgent(requestBody)
+                .then((response) => {
+                    console.log({response})
+                setResponse({
+                    status: 'Success',
+                    message: response
+                })
             })
-            .catch(() => {
-                setSaveStatus("Error");
+            .catch((error) => {
+                console.log({error})
+                setResponse({
+                    status: 'Error',
+                    message: error.message
+                })
             })           
     }
 
@@ -33,7 +42,12 @@ const CreateSupportAgent = () => {
         {
             name:"email",
             label: "Email",
-            type:"input"
+            type:"input",
+            isValid: (value) => {
+                const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                return emailRegex.test(value)
+            },
+            errorMessage: 'Email is not valid. Try again'
         },
         {
             name:"phone",
@@ -50,27 +64,21 @@ const CreateSupportAgent = () => {
     return (
         <div className="flex flex-col items-center relative">
             <p className=" text-xl font-bold text-center">Create New Support Agent</p>
-            <Form fields={formFields} formData={responseBody} onSubmitHandler={onSubmitHandler} inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Agent"}/>
-            {saveStatus === "Success"  &&
-            <Modal message="Success" 
+            <Form fields={formFields} formData={requestBody} onSubmitHandler={onSubmitHandler} inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Agent"}/>
+            {response.status === "Success"  &&
+            <Modal message={`You have sucessfully created Agent with id ${response.message._id}`}
                 handleOkClick={() => {
-                    setSaveStatus("None");
-                    setResponseBody({})
-                }}
-                handleCancelClick= {() => {
-                    setSaveStatus("None");
-                    setResponseBody({});
-                }} />
+                    setResponse({
+                        status: 'None'
+                    })
+                }}/>
             }
-            {saveStatus === "Error"  &&
-                <Modal message="Error"
+            {response.status === "Error"  &&
+                <Modal message={"Error occured while creating Agent! Try again"}
                     handleOkClick={() => {
-                        setSaveStatus("None");
-                        setResponseBody({})
-                    }}
-                    handleCancelClick= {() => {
-                        setSaveStatus("None");
-                        setResponseBody({});
+                        setResponse({
+                            status: 'None'
+                        })
                     }} />
             }
         </div>

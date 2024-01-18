@@ -1,77 +1,82 @@
-import { useState } from "react";
+import {useState} from "react";
 import saveSupportTicket from "../../api/saveSupportTicket";
 import Modal from "../../components/Modal";
 import Form from "../../components/Form";
 
 const CreateSupportTicket = () => {
-    const [responseBody, setResponseBody] = useState({});
-    const [saveStatus, setSaveStatus] = useState('None');
+    const [requestBody, setRequestBody] = useState({});
+    const [response, setResponse] = useState({
+        status: 'None'
+    })
 
     const inputChangeHandler = (event) => {
-        const {id, value} = event.target
-        setResponseBody({...responseBody, [id]: value})
+        const {name, value} = event.target
+        setRequestBody({...requestBody, [name]: value})
     }
-    
-    const onSubmitHandler = async(event) => {
-            event.preventDefault()
-            saveSupportTicket(responseBody)
-            .then(() => {
-                setSaveStatus("Success")
+
+    const onSubmitHandler = async (event) => {
+        event.preventDefault()
+        saveSupportTicket(requestBody)
+            .then((response) => {
+                console.log({response})
+                setResponse({
+                    status: 'Success',
+                    message: response
+                })
             })
-            .catch(() => {
-                setSaveStatus("Error");
-            })           
+            .catch((error) => {
+                console.log({error})
+                setResponse({
+                    status: 'Error',
+                    message: error.message
+                })
+            })
     }
 
     const formFields = [
         {
-            name:"topic",
+            name: "topic",
             label: "Topic",
-            type:"input"
+            type: "input"
         },
         {
-            name:"description",
+            name: "description",
             label: "Description",
-            type:"input"
+            type: "input"
         },
         {
-            name:"severity",
+            name: "severity",
             label: "Severity",
-            type:"select",
-            options: ["Low","High","Medium","Urgent"]
+            type: "select",
+            options: ["Low", "High", "Medium", "Urgent"]
         },
         {
-            name:"type",
+            name: "type",
             label: "Type",
-            type:"input"
+            type: "input"
         }
     ]
 
     return (
         <div className="flex flex-col items-center relative">
             <p className=" text-xl font-bold text-center">Create New Support Ticket</p>
-            <Form fields={formFields} formData={responseBody} onSubmitHandler={onSubmitHandler} inputChangeHandler={inputChangeHandler}  submitButtonLabel={"Create Support Ticket"}/>
-            {saveStatus === "Success"  &&
-            <Modal message="Success" 
-                handleOkClick={() => {
-                    setSaveStatus("None");
-                    setResponseBody({})
-                }}
-                handleCancelClick= {() => {
-                    setSaveStatus("None");
-                    setResponseBody({});
-                }} />
+            <Form fields={formFields} formData={requestBody} onSubmitHandler={onSubmitHandler}
+                  inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Ticket"}/>
+            {response.status === "Success" &&
+                <Modal message={`You have sucessfully created Ticket with id ${response.message._id}`}
+                       handleOkClick={() => {
+                           setResponse({
+                               status: 'None'
+                           })
+                       }}/>
             }
-            {saveStatus === "Error"  &&
-                <Modal message="Error"
-                    handleOkClick={() => {
-                        setSaveStatus("None");
-                        setResponseBody({})
-                    }}
-                    handleCancelClick= {() => {
-                        setSaveStatus("None");
-                        setResponseBody({});
-                    }} />
+            {response.status === "Error" &&
+                <Modal message={"Error occured while creating Agent! Try again"}
+                       handleOkClick={() => {
+                           setResponse({
+                               status: 'None'
+                           })
+                       }}/>
             }
         </div>
     )

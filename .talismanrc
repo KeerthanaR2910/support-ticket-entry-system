@@ -5,6 +5,8 @@ fileignoreconfig:
   checksum: 718a5395acf0a3343bb3d8c8a30245f11e0ff51e0a81df35b7b347deb9f1d521
 - filename: frontend/src/components/FilterTags.js
   checksum: ae665f60a5800951ccc1b5fe033a459ca3cdb541d84ee42112f129f30438920d
+- filename: frontend/src/components/Input.js
+  checksum: 3e4efe9b6f1e20718e239bfc7a672716a30153cfa5c6557a4a5f378509eb00f4
 - filename: frontend/src/components/Table.js
   checksum: 3571b88c69cc0da669bde98a0ca13d2e44a8f31b61c933ad6735cbee9a8afbaf
 - filename: frontend/src/pages/ShowSupportTickets/index.js

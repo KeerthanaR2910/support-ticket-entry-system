@@ -12,12 +12,14 @@ export function Table({columns, rows}) {
                 key={field}
                 className="border-gray-400 bg-gray-300 p-4 border-b group relative"
               >
+                <div className="flex items-center justify-between font-normal opacity-70">
                 <Typography
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70 flex justify-between"
+                  className="leading-none opacity-70"
                 >
                 {headerName}
+                </Typography>
                 {sortable && <button className="hidden group-hover:block">
                   {sort.value === "asc" ?
                       (<HiChevronDown onClick={() => {
@@ -32,7 +34,7 @@ export function Table({columns, rows}) {
                           }} />) )}
                 </button>}
                 {filterable && <Filter {...filter}/>}
-                </Typography>
+                </div>
               </th>
             ))}
           </tr>

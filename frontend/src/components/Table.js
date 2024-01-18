@@ -1,8 +1,26 @@
 import { Typography} from "@material-tailwind/react";
 import { HiChevronUpDown,HiChevronDown,HiChevronUp } from "react-icons/hi2";
 import Filter from "./Filter";
+import resolveTicket from "../api/resolveTicket";
 
-export function Table({columns, rows}) {
+export function Table({columns, rows,updateResolveStatus}) {
+    const onResolve = async (ticketId) => {
+            resolveTicket(ticketId)
+                .then((response) => {
+                    console.log({response})
+                    updateResolveStatus({
+                        status: 'Success',
+                        message: response
+                    })
+                })
+                .catch((error) => {
+                    console.log({error})
+                    updateResolveStatus({
+                        status: 'Error',
+                        message: error.message
+                    })
+                })
+        }
   return (
       <table className="w-full min-w-max table-auto text-left">
         <thead>
@@ -10,7 +28,7 @@ export function Table({columns, rows}) {
             {columns.map(({field,headerName, sortable,filterable,sort,filter}) => (
               <th
                 key={field}
-                className="border-gray-400 bg-gray-300 p-4 border-b group relative"
+                className="border-gray-400 bg-gray-300 p-4 border-b group"
               >
                 <div className="flex items-center justify-between font-normal opacity-70">
                 <Typography
@@ -118,6 +136,25 @@ export function Table({columns, rows}) {
                     {resolvedOn}
                   </Typography>
                 </td>
+                  <td className={classes}>
+                      {resolvedOn ? <button className="appearance-none border-y-white bg-neutral-400 text-neutral-800 p-1 rounded-md " disabled={true}><Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                      >Resolved
+                          </Typography>
+                      </button> :
+                          <button className="appearance-none bg-blue-500 border-y-white hover:bg-blue-600 text-neutral-200 p-1 rounded-md"
+                            onClick={async () => await onResolve(_id)}
+                          ><Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                          >Resolve
+                          </Typography>
+                          </button>
+                      }
+                  </td>
               </tr>
             );
           })}

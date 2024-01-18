@@ -4,6 +4,7 @@ import {Card, CardFooter, CardHeader} from "@material-tailwind/react";
 import PaginationBar from "../../components/PaginationBar";
 import {getPageQueryParams, getSortQueryParams,getFilterParams} from "../../utils/helper";
 import FilterBadges from "../../components/FilterBadges";
+import Modal from "../../components/Modal";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);
@@ -13,6 +14,9 @@ const ShowSupportTicket = () => {
     const [page,setPage] = useState({
         page: 1,
         pageSize: 10
+    })
+    const [resolveResponse, setResolvedResponse] = useState({
+        status: 'None'
     })
 
     const getColumns = (sort,filters) => {
@@ -101,6 +105,10 @@ const ShowSupportTicket = () => {
                     }
                 }
             },
+            {
+                field: "resolve",
+                headerName: "Resolve"
+            },
         ]
     }
 
@@ -120,7 +128,7 @@ const ShowSupportTicket = () => {
                 setRows(responseJson.data)
                 setRowsCount(responseJson.totalCount);
             })
-    }, [sort,page,filters])
+    }, [sort,page,filters,resolveResponse])
 
     return (
         <div>
@@ -128,7 +136,23 @@ const ShowSupportTicket = () => {
                 <CardHeader>
                     <FilterBadges filters={filters} setFilters={setFilters} />
                 </CardHeader>
-                <Table columns={columns} rows={rows}/>
+                <Table columns={columns} rows={rows} updateResolveStatus={setResolvedResponse}/>
+                {resolveResponse.status === "Success" &&
+                    <Modal message={`You have sucessfully successfully Resolved Ticket with id ${resolveResponse.message._id}`}
+                           handleOkClick={() => {
+                               setResolvedResponse({
+                                   status: 'None'
+                               })
+                           }}/>
+                }
+                {resolveResponse.status === "Error" &&
+                    <Modal message={"Error occured while creating Agent! Try again"}
+                           handleOkClick={() => {
+                               setResolvedResponse({
+                                   status: 'None'
+                               })
+                           }}/>
+                }
                 <CardFooter>
                     <PaginationBar page={page} totalRowsCount={rowsCount} setPage={setPage}/>
                 </CardFooter>

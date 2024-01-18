@@ -6,7 +6,7 @@ const lastActiveAgentSchema = mongoose.Schema(
             type: String,
             required: true,
         }
-    }, { _v : false });
+    }, { __v : false });
 
 
 export const LastActiveAgent = mongoose.model('Last-Active-Agent', lastActiveAgentSchema);

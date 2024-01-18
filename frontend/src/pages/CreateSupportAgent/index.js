@@ -1,38 +1,7 @@
-import { useState } from "react";
-import Modal from "../../components/Modal";
-import Form from "../../components/Form";
 import saveSupportAgent from "../../api/saveSupportAgent";
+import CreateCard from "../../components/CreateCard";
 
 const CreateSupportAgent = () => {
-    const [requestBody, setrequestBody] = useState({});
-    const [response, setResponse] = useState({
-        status:'None'
-    })
-
-    const inputChangeHandler = (event) => {
-        const {name, value} = event.target
-        setrequestBody({...requestBody, [name]: value})
-    }
-    
-    const onSubmitHandler = async(event) => {
-            event.preventDefault()
-            saveSupportAgent(requestBody)
-                .then((response) => {
-                    console.log({response})
-                setResponse({
-                    status: 'Success',
-                    message: response
-                })
-            })
-            .catch((error) => {
-                console.log({error})
-                setResponse({
-                    status: 'Error',
-                    message: error.message
-                })
-            })           
-    }
-
     const formFields = [
         {
             name:"name",
@@ -62,26 +31,7 @@ const CreateSupportAgent = () => {
     ]
 
     return (
-        <div className="flex flex-col items-center">
-            <p className=" text-xl font-bold text-center">Create New Support Agent</p>
-            <Form fields={formFields} formData={requestBody} onSubmitHandler={onSubmitHandler} inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Agent"}/>
-            {response.status === "Success"  &&
-            <Modal message={`You have sucessfully created Agent with id ${response.message._id}`}
-                handleOkClick={() => {
-                    setResponse({
-                        status: 'None'
-                    })
-                }}/>
-            }
-            {response.status === "Error"  &&
-                <Modal message={"Error occured while creating Agent! Try again"}
-                    handleOkClick={() => {
-                        setResponse({
-                            status: 'None'
-                        })
-                    }} />
-            }
-        </div>
+        <CreateCard formFields={formFields} onSave={saveSupportAgent} />
     )
 }
 

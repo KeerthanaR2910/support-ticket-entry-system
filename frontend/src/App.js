@@ -9,6 +9,9 @@ import CreateSupportAgent from './pages/CreateSupportAgent';
 import ShowSupportTicket from './pages/ShowSupportTickets'
 import CreateSupportTicket from './pages/CreateSupportTicket'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <Router>
@@ -20,6 +23,7 @@ function App() {
               <Route path="/new-support-agent" element={<CreateSupportAgent />} />
               <Route path="/new-support-ticket" element={<CreateSupportTicket />} />
             </Routes>
+            <ToastContainer />
         </div>
     </Router>
   );

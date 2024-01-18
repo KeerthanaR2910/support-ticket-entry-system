@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: frontend/package-lock.json
-  checksum: 6589cd58b22ec487d64481999db7cabcd00adc8b6dd76ef275d966d90836e284
+  checksum: c4f859ff2ad87da7af572083b25991279bb14eb67f3b95bce036e1110beea568
 - filename: frontend/src/components/FilterBadges.js
   checksum: 718a5395acf0a3343bb3d8c8a30245f11e0ff51e0a81df35b7b347deb9f1d521
 - filename: frontend/src/components/FilterTags.js

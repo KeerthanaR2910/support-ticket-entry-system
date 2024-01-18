@@ -1,7 +1,7 @@
 import { IoFunnelOutline, IoFunnel } from "react-icons/io5";
 import {useState} from "react";
 
-const Filter = ({value,onFilterApply}) => {
+const HeadingFilter = ({value,onFilterApply}) => {
     const [open,setOpen] = useState(false)
     const [inputValue,setInputValue ]= useState(value ?? "");
     return (
@@ -27,5 +27,5 @@ const Filter = ({value,onFilterApply}) => {
   )
 }
 
-export default Filter
+export default HeadingFilter
 

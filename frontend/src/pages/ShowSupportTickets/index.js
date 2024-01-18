@@ -4,7 +4,6 @@ import {Card, CardFooter, CardHeader} from "@material-tailwind/react";
 import PaginationBar from "../../components/PaginationBar";
 import {getPageQueryParams, getSortQueryParams,getFilterParams} from "../../utils/helper";
 import FilterBadges from "../../components/FilterBadges";
-import Modal from "../../components/Modal";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);
@@ -15,9 +14,8 @@ const ShowSupportTicket = () => {
         page: 1,
         pageSize: 10
     })
-    const [resolveResponse, setResolvedResponse] = useState({
-        status: 'None'
-    })
+    const [resolve, setResolvedResponse] = useState(false)
+    const handleResolve = () => setResolvedResponse(!resolve)
 
     const getColumns = (sort,filters) => {
         return [
@@ -128,7 +126,7 @@ const ShowSupportTicket = () => {
                 setRows(responseJson.data)
                 setRowsCount(responseJson.totalCount);
             })
-    }, [sort,page,filters,resolveResponse])
+    }, [sort,page,filters,resolve])
 
     return (
         <div>
@@ -136,23 +134,7 @@ const ShowSupportTicket = () => {
                 <CardHeader>
                     <FilterBadges filters={filters} setFilters={setFilters} />
                 </CardHeader>
-                <Table columns={columns} rows={rows} updateResolveStatus={setResolvedResponse}/>
-                {resolveResponse.status === "Success" &&
-                    <Modal message={`You have sucessfully successfully Resolved Ticket with id ${resolveResponse.message._id}`}
-                           handleOkClick={() => {
-                               setResolvedResponse({
-                                   status: 'None'
-                               })
-                           }}/>
-                }
-                {resolveResponse.status === "Error" &&
-                    <Modal message={"Error occured while creating Agent! Try again"}
-                           handleOkClick={() => {
-                               setResolvedResponse({
-                                   status: 'None'
-                               })
-                           }}/>
-                }
+                <Table columns={columns} rows={rows} handleResolve={handleResolve}/>
                 <CardFooter>
                     <PaginationBar page={page} totalRowsCount={rowsCount} setPage={setPage}/>
                 </CardFooter>

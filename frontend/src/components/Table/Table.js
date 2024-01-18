@@ -8,7 +8,7 @@ import TableData from "./TableData";
 export function Table({columns, rows, handleResolve}) {
     const columnKeys = [];
     columns.forEach((column) => column.field!=='resolve' && columnKeys.push(column.field))
-    const onResolve = async (ticketId) => {
+    const onResolve = (ticketId) => {
         resolveTicket(ticketId)
             .then(() => {
                 handleResolve()

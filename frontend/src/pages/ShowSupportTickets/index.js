@@ -2,22 +2,24 @@ import {Table} from "../../components/Table/Table";
 import {useEffect, useMemo, useState} from "react"
 import {Card, CardFooter, CardHeader} from "@material-tailwind/react";
 import PaginationBar from "../../components/PaginationBar";
-import {getPageQueryParams, getSortQueryParams,getFilterParams} from "../../utils/helper";
+import {getFilterParams, getPageQueryParams, getSortQueryParams} from "../../utils/helper";
 import FilterBadges from "../../components/FilterBadges";
+import getSupportTickets from "../../api/getSupportTickets";
+import {toast} from "react-toastify";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);
     const [rowsCount, setRowsCount] = useState(10);
     const [sort, setSort] = useState({});
     const [filters, setFilters] = useState({});
-    const [page,setPage] = useState({
+    const [page, setPage] = useState({
         page: 1,
         pageSize: 10
     })
     const [resolve, setResolvedResponse] = useState(false)
     const handleResolve = () => setResolvedResponse(!resolve)
 
-    const getColumns = (sort,filters) => {
+    const getColumns = (sort, filters) => {
         return [
             {
                 field: "topic",
@@ -99,7 +101,7 @@ const ShowSupportTicket = () => {
                 sort: {
                     value: sort["resolvedOn"],
                     onSort: (sortValue) => {
-                        setSort({ "resolvedOn": sortValue})
+                        setSort({"resolvedOn": sortValue})
                     }
                 }
             },
@@ -110,35 +112,34 @@ const ShowSupportTicket = () => {
         ]
     }
 
-    const columns = useMemo(() => getColumns(sort,filters), [sort,filters])
+    const columns = useMemo(() => getColumns(sort, filters), [sort, filters])
 
     useEffect(() => {
         const sortParams = getSortQueryParams(sort)
         const pageParams = getPageQueryParams(page)
         const filterParams = getFilterParams(filters)
-        fetch(`http://localhost:8888/support-tickets?${pageParams}${sortParams}&${filterParams}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then((response) => response.json())
-            .then((responseJson) => {
-                setRows(responseJson.data)
-                setRowsCount(responseJson.totalCount);
+        const queryParam = `${pageParams}${sortParams}&${filterParams}`
+
+        getSupportTickets(queryParam)
+            .then((response) => {
+                setRows(response.data)
+                setRowsCount(response.totalCount);
             })
-    }, [sort,page,filters,resolve])
+    }, [sort, page, filters, resolve])
 
 
-    useEffect(()=> {setPage({
-        page: 1,
-        pageSize: 10
-    })},[filters])
+    useEffect(() => {
+        setPage({
+            page: 1,
+            pageSize: 10
+        })
+    }, [filters])
 
     return (
         <div>
             <Card className="h-full w-full overflow-scroll p-2">
                 <CardHeader>
-                    <FilterBadges filters={filters} setFilters={setFilters} />
+                    <FilterBadges filters={filters} setFilters={setFilters}/>
                 </CardHeader>
                 <Table columns={columns} rows={rows} handleResolve={handleResolve}/>
                 <CardFooter>

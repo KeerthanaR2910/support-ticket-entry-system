@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <Router>
-        <div className="relative">
+        <div>
             <Header />
             <Routes>
               <Route index element={<ShowSupportTicket />} />

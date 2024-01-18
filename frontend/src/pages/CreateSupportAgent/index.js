@@ -1,7 +1,7 @@
 import { useState } from "react";
-import saveSupportTicket from "../../api/saveSupportTicket";
 import Modal from "../../components/Modal";
 import Form from "../../components/Form";
+import saveSupportAgent from "../../api/saveSupportAgent";
 
 const CreateSupportAgent = () => {
     const [responseBody, setResponseBody] = useState({});
@@ -15,7 +15,7 @@ const CreateSupportAgent = () => {
     const onSubmitHandler = async(event) => {
             event.preventDefault()
             //TODO saveSupportAgent Api
-            saveSupportTicket(responseBody)
+            saveSupportAgent(responseBody)
             .then(() => {
                 setSaveStatus("Success")
             })

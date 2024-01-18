@@ -17,10 +17,10 @@ const Form = ({formData,fields,onSubmitHandler,inputChangeHandler,submitButtonLa
                                 <select
                                     name={field.name}
                                     required
-                                    value={formData[field.label]}
+                                    defaultValue=""
                                     onChange={(e) => inputChangeHandler(e)}
                                     className="w-full bg-slate-300 border border-gray-200 text-gray-700 p-2 focus:outline-none focus:outline-gray-500 focus:bg-slate-50">
-                                    <option disabled defaultValue></option>
+                                    <option disabled></option>
                                     {field.options.map((option) => <option value={option}>{option}</option> )}
                                 </select>
                             </div>

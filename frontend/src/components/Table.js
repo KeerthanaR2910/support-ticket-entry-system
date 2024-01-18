@@ -137,14 +137,14 @@ export function Table({columns, rows,updateResolveStatus}) {
                   </Typography>
                 </td>
                   <td className={classes}>
-                      {resolvedOn ? <button className="appearance-none border-y-white bg-neutral-400 text-neutral-800 p-1 rounded-md " disabled={true}><Typography
+                      {resolvedOn ? <button className="appearance-none border-y-white bg-neutral-400 text-neutral-800 p-1 rounded-md w-20" disabled={true}><Typography
                           variant="small"
                           color="blue-gray"
                           className="font-normal"
                       >Resolved
                           </Typography>
                       </button> :
-                          <button className="appearance-none bg-blue-500 border-y-white hover:bg-blue-600 text-neutral-200 p-1 rounded-md"
+                          <button className="appearance-none bg-blue-500 border-y-white hover:bg-blue-600 text-neutral-200 p-1 rounded-md w-20"
                             onClick={async () => await onResolve(_id)}
                           ><Typography
                               variant="small"

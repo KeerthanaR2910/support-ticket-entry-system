@@ -3,10 +3,9 @@ import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 
 const PaginationBar = ({page: pageModel, totalRowsCount,setPage}) => {
     let totalPages = Math.floor(totalRowsCount/pageModel.pageSize)
-    if(totalRowsCount % pageModel.pageSize != 0){
+    if(totalRowsCount % pageModel.pageSize !== 0){
         totalPages+=1;
-        console.log({totalPages},"ddd")
-    } 
+    }
     if(totalRowsCount === 0) totalPages = 0
     const isFirst = pageModel.page === 1
     const isLast = pageModel.page === totalPages
@@ -17,7 +16,7 @@ const PaginationBar = ({page: pageModel, totalRowsCount,setPage}) => {
                 Page {pageModel.page} of {totalPages}
             </Typography>
             <div>
-                <button disabled={isFirst} className="" onClick={() => {
+                <button disabled={isFirst} className={isFirst && " opacity-35"} onClick={() => {
                     setPage({
                         ...pageModel,
                         page: pageModel.page - 1
@@ -26,13 +25,16 @@ const PaginationBar = ({page: pageModel, totalRowsCount,setPage}) => {
                 }}>
                     <GrFormPrevious size={25}/>
                 </button>
-                <button  disabled={isLast} onClick={() => {
-                    setPage({
-                        ...pageModel,
-                        page: pageModel.page + 1
+                <button  
+                    disabled={isLast} 
+                    className={isLast && " opacity-35"}
+                    onClick={() => {
+                        setPage({
+                            ...pageModel,
+                            page: pageModel.page + 1
 
-                    })
-                }}>
+                        })
+                    }}>
                     <GrFormNext size={25}/>
                 </button>
             </div>

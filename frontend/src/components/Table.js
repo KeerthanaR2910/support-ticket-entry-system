@@ -1,10 +1,9 @@
-import { Card, Typography } from "@material-tailwind/react";
+import {Card, CardFooter, Typography} from "@material-tailwind/react";
 import { HiChevronUpDown,HiChevronDown,HiChevronUp } from "react-icons/hi2";
 import { CiFilter } from "react-icons/ci";
 
 export function Table({columns, rows}) {
   return (
-    <Card className="h-full w-full overflow-scroll p-2">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -127,6 +126,5 @@ export function Table({columns, rows}) {
           })}
         </tbody>
       </table>
-    </Card>
   );
 }

@@ -12,7 +12,6 @@ const ShowSupportTicket = () => {
     });
 
     useEffect(() => {
-        console.log(decodeURI(window.location.search))
         const queryParams = window.location.search
         fetch(`http://localhost:8888/support-tickets${queryParams}`,{
             method: "GET",
@@ -21,7 +20,6 @@ const ShowSupportTicket = () => {
             },
         }).then((response) =>  response.json())
             .then((responseJson) => {
-                console.log(responseJson.data)
                 setRows(responseJson.data)
                 setRowCount(responseJson.totalCount);
             })
@@ -109,14 +107,12 @@ const ShowSupportTicket = () => {
     };
     const onPaginationModelChange = (paginationModel) => {
         setPaginationModel(paginationModel)
-        console.log(searchParams.getAll('page'),"getAll")
         const updatedSearchParams = {
             ...Object.fromEntries(searchParams.entries()),
             "page": paginationModel.page+1,
             "limit": paginationModel.pageSize
         }
         setSearchParams(updatedSearchParams);
-        console.log({updatedSearchParams,searchParams})
     };
     const onFilterModelChange = (filterModel) => {
         console.log(filterModel)

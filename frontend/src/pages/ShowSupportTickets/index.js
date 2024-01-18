@@ -1,18 +1,21 @@
 import {Table} from "../../components/Table";
 import {useEffect, useMemo, useState} from "react"
-import {Card, CardFooter} from "@material-tailwind/react";
+import {Card, CardFooter, CardHeader} from "@material-tailwind/react";
 import PaginationBar from "../../components/PaginationBar";
+import {getPageQueryParams, getSortQueryParams,getFilterParams} from "../../utils/helper";
+import FilterBadges from "../../components/FilterBadges";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);
     const [rowsCount, setRowsCount] = useState(10);
     const [sort, setSort] = useState({});
+    const [filters, setFilters] = useState({});
     const [page,setPage] = useState({
         page: 1,
         pageSize: 10
     })
 
-    const getColumns = (sort) => {
+    const getColumns = (sort,filters) => {
         return [
             {
                 field: "topic",
@@ -43,24 +46,48 @@ const ShowSupportTicket = () => {
                 headerName: "Severity",
                 sortable: false,
                 filterable: true,
+                filter: {
+                    value: filters["severity"],
+                    onFilterApply: (filterValue) => {
+                        setFilters({...filters, "severity": filterValue})
+                    }
+                }
             },
             {
                 field: "type",
                 headerName: "Type",
                 sortable: false,
                 filterable: true,
+                filter: {
+                    value: filters["type"],
+                    onFilterApply: (filterValue) => {
+                        setFilters({...filters, "type": filterValue})
+                    }
+                }
             },
             {
                 field: "assignedTo",
-                headerName: "AssignedTo",
+                headerName: "Assigned To",
                 sortable: false,
                 filterable: true,
+                filter: {
+                    value: filters["assignedTo"],
+                    onFilterApply: (filterValue) => {
+                        setFilters({...filters, "assignedTo": filterValue})
+                    }
+                }
             },
             {
                 field: "status",
                 headerName: "Status",
                 sortable: false,
-                filterable: true
+                filterable: true,
+                filter: {
+                    value: filters["status"],
+                    onFilterApply: (filterValue) => {
+                        setFilters({...filters, "status": filterValue})
+                    }
+                }
             },
             {
                 field: "resolvedOn",
@@ -76,12 +103,14 @@ const ShowSupportTicket = () => {
             },
         ]
     }
-    const columns = useMemo(() => getColumns(sort), [sort])
+
+    const columns = useMemo(() => getColumns(sort,filters), [sort,filters])
 
     useEffect(() => {
-        const sortParams = getSortQueryParam(sort)
-        const pageParams = getPageQueryParams(page);
-        fetch(`http://localhost:8888/support-tickets?${pageParams}&${sortParams}`, {
+        const sortParams = getSortQueryParams(sort)
+        const pageParams = getPageQueryParams(page)
+        const filterParams = getFilterParams(filters)
+        fetch(`http://localhost:8888/support-tickets?${pageParams}${sortParams}&${filterParams}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -91,11 +120,14 @@ const ShowSupportTicket = () => {
                 setRows(responseJson.data)
                 setRowsCount(responseJson.totalCount);
             })
-    }, [sort,page])
+    }, [sort,page,filters])
 
     return (
         <div>
             <Card className="h-full w-full overflow-scroll p-2">
+                <CardHeader>
+                    <FilterBadges filters={filters} setFilters={setFilters} />
+                </CardHeader>
                 <Table columns={columns} rows={rows}/>
                 <CardFooter>
                     <PaginationBar page={page} totalRowsCount={rowsCount} setPage={setPage}/>
@@ -103,34 +135,6 @@ const ShowSupportTicket = () => {
             </Card>
         </div>
     )
-}
-
-const updateColumnAfterSorting = (sortField, sortValue, columns, setColumns) => {
-    const filteredColumns = columns.map((column) => {
-        if (sortField === column.field) {
-            return {
-                ...column,
-                sort: {
-                    ...column.sort,
-                    value: sortValue
-                }
-            }
-        } else {
-            return column
-        }
-    })
-    setColumns(filteredColumns)
-}
-
-const getSortQueryParam = (sort) => {
-    const sortQueryString = Object.keys(sort).map((key) => {
-        if (sort[key]) return `${key}:${sort[key]}`;
-    }).join(",");
-    return `sort=${encodeURIComponent(sortQueryString)}` ?? "";
-}
-
-const getPageQueryParams = (page) => {
-    return `page=${page.page}&limit=${page.pageSize}` 
 }
 
 export default ShowSupportTicket

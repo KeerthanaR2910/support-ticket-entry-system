@@ -1,16 +1,16 @@
-import {Card, CardFooter, Typography} from "@material-tailwind/react";
+import { Typography} from "@material-tailwind/react";
 import { HiChevronUpDown,HiChevronDown,HiChevronUp } from "react-icons/hi2";
-import { CiFilter } from "react-icons/ci";
+import Filter from "./Filter";
 
 export function Table({columns, rows}) {
   return (
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {columns.map(({field,headerName, sortable,filterable,sort}) => (
+            {columns.map(({field,headerName, sortable,filterable,sort,filter}) => (
               <th
                 key={field}
-                className="border-gray-400 bg-gray-300 p-4 border-b group "
+                className="border-gray-400 bg-gray-300 p-4 border-b group relative"
               >
                 <Typography
                   variant="small"
@@ -21,22 +21,17 @@ export function Table({columns, rows}) {
                 {sortable && <button className="hidden group-hover:block">
                   {sort.value === "asc" ?
                       (<HiChevronDown onClick={() => {
-                          console.log("head.sort.onSort.desc",sort.value)
                           sort.onSort("desc")
                       }} />) :
                       (sort.value === "desc" ?
                           (<HiChevronUp onClick={() =>{
-                              console.log("head.sort.onSort.undefined",sort.value)
                               sort.onSort(undefined)}
                           } />)  :
                           (<HiChevronUpDown onClick={() => {
-                              console.log("head.sort.onSort.asc",sort.value)
                               sort.onSort("asc")
                           }} />) )}
                 </button>}
-                {filterable && <button className="hidden group-hover:block" onClick={() => {}}>
-                    <CiFilter />
-                </button>}
+                {filterable && <Filter {...filter}/>}
                 </Typography>
               </th>
             ))}

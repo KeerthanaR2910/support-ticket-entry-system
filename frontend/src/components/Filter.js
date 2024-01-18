@@ -10,7 +10,7 @@ const Filter = ({value,onFilterApply}) => {
               {open ? <IoFunnel /> : <IoFunnelOutline  className={"hidden group-hover:block"}/>}
           </button>
         {open && 
-        <div className="flex gap-1 w-fit relative left-0 z-100">
+        <div className="flex gap-1 w-fit z-100">
           <input 
             type={"text"} 
             className=" appearance-none focus:outline-none w-fit p-1" 

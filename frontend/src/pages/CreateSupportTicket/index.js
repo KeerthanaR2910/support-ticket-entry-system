@@ -58,7 +58,7 @@ const CreateSupportTicket = () => {
     ]
 
     return (
-        <div className="flex flex-col items-center relative">
+        <div className="flex flex-col items-center">
             <p className=" text-xl font-bold text-center">Create New Support Ticket</p>
             <Form fields={formFields} formData={requestBody} onSubmitHandler={onSubmitHandler}
                   inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Ticket"}/>
@@ -71,7 +71,7 @@ const CreateSupportTicket = () => {
                        }}/>
             }
             {response.status === "Error" &&
-                <Modal message={"Error occured while creating Agent! Try again"}
+                <Modal message={"Error occured while creating Ticket! Try again"}
                        handleOkClick={() => {
                            setResponse({
                                status: 'None'

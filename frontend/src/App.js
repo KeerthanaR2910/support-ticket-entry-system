@@ -12,13 +12,15 @@ import CreateSupportTicket from './pages/CreateSupportTicket'
 function App() {
   return (
     <Router>
-        <Header />
-        <Routes>
-          <Route index element={<ShowSupportTicket />} />
-          <Route path="/support-tickets" element={<ShowSupportTicket />} />
-          <Route path="/new-support-agent" element={<CreateSupportAgent />} />
-          <Route path="/new-support-ticket" element={<CreateSupportTicket />} />
-        </Routes>
+        <div className="relative">
+            <Header />
+            <Routes>
+              <Route index element={<ShowSupportTicket />} />
+              <Route path="/support-tickets" element={<ShowSupportTicket />} />
+              <Route path="/new-support-agent" element={<CreateSupportAgent />} />
+              <Route path="/new-support-ticket" element={<CreateSupportTicket />} />
+            </Routes>
+        </div>
     </Router>
   );
 }

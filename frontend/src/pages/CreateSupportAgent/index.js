@@ -62,7 +62,7 @@ const CreateSupportAgent = () => {
     ]
 
     return (
-        <div className="flex flex-col items-center relative">
+        <div className="flex flex-col items-center">
             <p className=" text-xl font-bold text-center">Create New Support Agent</p>
             <Form fields={formFields} formData={requestBody} onSubmitHandler={onSubmitHandler} inputChangeHandler={inputChangeHandler} submitButtonLabel={"Create Support Agent"}/>
             {response.status === "Success"  &&

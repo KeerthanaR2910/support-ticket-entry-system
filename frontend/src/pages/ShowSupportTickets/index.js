@@ -5,7 +5,6 @@ import PaginationBar from "../../components/PaginationBar";
 import {getFilterParams, getPageQueryParams, getSortQueryParams} from "../../utils/helper";
 import FilterBadges from "../../components/FilterBadges";
 import getSupportTickets from "../../api/getSupportTickets";
-import {toast} from "react-toastify";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);

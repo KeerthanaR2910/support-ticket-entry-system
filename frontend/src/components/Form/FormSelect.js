@@ -1,4 +1,4 @@
-const FormSelect = (field, value, inputChangeHandler) => {
+const FormSelect = ({field, value, inputChangeHandler}) => {
     return (
         <div className="flex flex-col h-fit gap-y-2">
             <label className=" text-md font-medium">
@@ -8,6 +8,7 @@ const FormSelect = (field, value, inputChangeHandler) => {
                 name={field.name}
                 defaultValue=""
                 value={value}
+                required
                 onChange={(e) => inputChangeHandler(e)}
                 className="w-full bg-slate-300 border border-gray-200 text-gray-700 p-2 focus:outline-none focus:outline-gray-500 focus:bg-slate-50">
                 <option disabled></option>

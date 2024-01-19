@@ -15,7 +15,7 @@ const handler = async (request, response) => {
         }
 
         const severityOptions = ["Low","Medium","High","Urgent"];
-        if(!(request.request.body.severity in severityOptions)){
+        if(!(severityOptions.includes(request.body.severity))){
             return response.status(400).send({
                 message: `Severity value should be in ${severityOptions}`,
             });

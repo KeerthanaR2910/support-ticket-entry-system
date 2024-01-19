@@ -8,7 +8,10 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["https://support-ticket-entry-system-ui.vercel.app/"],
+    methods: ["GET", "POST"]
+}));
 
 mongoose
     .connect(MONGO_DB_URL)

@@ -39,7 +39,7 @@ const handler = async (request, response) => {
 
         return response.status(200).json(responseBody);
     } catch (error) {
-        response.status(500).send({message: error.message});
+        return response.status(500).send({message: error.message});
     }
 };
 

@@ -14,6 +14,12 @@ const handler = async (request, response) => {
             });
         }
 
+        const severityOptions = ["Low","Medium","High","Urgent"];
+        if(!(request.request.body.severity in severityOptions)){
+            return response.status(400).send({
+                message: `Severity value should be in ${severityOptions}`,
+            });
+        }
         const ticketData = {
             topic: request.body.topic,
             description: request.body.description,
@@ -35,7 +41,7 @@ const handler = async (request, response) => {
 
         return response.status(201).send(ticket);
     } catch (error) {
-        response.status(500).send({message: error.message});
+        return response.status(500).send({message: error.message});
     }
 }
 

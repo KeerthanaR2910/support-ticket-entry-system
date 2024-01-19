@@ -1,4 +1,4 @@
 export const serviceConfig = {
-    baseUrl:"http://localhost:8888/"
+    baseUrl: process.env.REACT_APP_SERVICE_BASE_URL
 }
 

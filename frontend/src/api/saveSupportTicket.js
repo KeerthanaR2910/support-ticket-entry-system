@@ -1,6 +1,8 @@
+import {serviceConfig} from "../config";
+
 const saveSupportTicket = async (data) => {
     try{
-       const response = await fetch("http://localhost:8888/support-tickets",{
+       const response = await fetch(`${serviceConfig.baseUrl}/support-tickets`,{
            method:"POST",
            headers: {
                'Content-Type': 'application/json',

@@ -125,7 +125,8 @@ const ShowSupportTicket = () => {
             .then((response) => {
                 setRows(response.data)
                 setRowsCount(response.totalCount);
-                !showNoRowOverlay && setShowNoRowOverlay(false)
+                if(response.totalCount == 0) setShowNoRowOverlay(true)
+                else if(showNoRowOverlay) setShowNoRowOverlay(false)
             }).catch(() => {
                 setShowNoRowOverlay(true);
         })

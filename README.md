@@ -36,6 +36,9 @@ npm install
 cd backend
 npm install
 ```
+4. Add backend url to .env.local
+   1. Create `.env.local` in frontend directory
+   2. Add backend base url to `REACT_APP_SERVICE_BASE_URL` variable
 
 ## Start Application
 ### Frontend

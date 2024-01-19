@@ -11,6 +11,14 @@ const handler = async (request, response) => {
                 message: "Send all required fields: name, email, phone, description"
             })
         }
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+        if(!(emailRegex.test(response.body.email))){
+            return response.status(400).send({
+                message: "email is not valid. Send valid email"
+            })
+        }
+
         const supportAgentData = {
             name: request.body.name,
             email: request.body.email,

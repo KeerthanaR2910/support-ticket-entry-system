@@ -5,12 +5,14 @@ import PaginationBar from "../../components/PaginationBar";
 import {getFilterParams, getPageQueryParams, getSortQueryParams} from "../../utils/helper";
 import FilterBadges from "../../components/FilterBadges";
 import getSupportTickets from "../../api/getSupportTickets";
+import NoRowOverlay from "../../components/NoRowOverlay";
 
 const ShowSupportTicket = () => {
     const [rows, setRows] = useState([]);
     const [rowsCount, setRowsCount] = useState(10);
     const [sort, setSort] = useState({});
     const [filters, setFilters] = useState({});
+    const [showNoRowOverlay,setShowNoRowOverlay] = useState(false);
     const [page, setPage] = useState({
         page: 1,
         pageSize: 10
@@ -123,7 +125,10 @@ const ShowSupportTicket = () => {
             .then((response) => {
                 setRows(response.data)
                 setRowsCount(response.totalCount);
-            })
+                !showNoRowOverlay && setShowNoRowOverlay(false)
+            }).catch(() => {
+                setShowNoRowOverlay(true);
+        })
     }, [sort, page, filters, resolve])
 
 
@@ -141,9 +146,9 @@ const ShowSupportTicket = () => {
                     <FilterBadges filters={filters} setFilters={setFilters}/>
                 </CardHeader>
                 <Table columns={columns} rows={rows} handleResolve={handleResolve}/>
-                <CardFooter>
+                {showNoRowOverlay ? <NoRowOverlay /> : <CardFooter>
                     <PaginationBar page={page} totalRowsCount={rowsCount} setPage={setPage}/>
-                </CardFooter>
+                </CardFooter> }
             </Card>
         </div>
     )

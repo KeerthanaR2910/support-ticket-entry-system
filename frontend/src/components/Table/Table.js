@@ -15,7 +15,7 @@ export function Table({columns, rows, handleResolve}) {
                 toast.success(`You have sucessfully successfully Resolved Ticket with id ${ticketId}`, {theme: "dark"})
             })
             .catch(() => {
-                toast.success(`Error occured while resolving ticket with id ${ticketId}`, {theme: "dark"})
+                toast.error(`Error occured while resolving ticket with id ${ticketId}`, {theme: "dark"})
             })
     }
     return (

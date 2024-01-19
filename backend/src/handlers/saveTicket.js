@@ -41,6 +41,7 @@ const handler = async (request, response) => {
 
         return response.status(201).send(ticket);
     } catch (error) {
+        console.log(error)
         return response.status(500).send({message: error.message});
     }
 }

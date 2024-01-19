@@ -7,6 +7,7 @@ const resolveTicketHandler =  async (request, response)  => {
         return response.status(200).json(ticket);
     }
     catch (error) {
+        console.log(error)
         return response.status(500).send({message: error.message});
     }
 }

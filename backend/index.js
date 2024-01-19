@@ -1,8 +1,8 @@
 import express from "express"
-import {MONGO_DB_URL, PORT} from "./config.js";
+import {MONGO_DB_URL, PORT} from "./src/config.js";
 import mongoose from "mongoose";
-import supportAgentsRoute from "./routes/agentsRoute.js";
-import ticketRoute from "./routes/ticketRoute.js";
+import supportAgentsRoute from "./src/routes/agentsRoute.js";
+import ticketRoute from "./src/routes/ticketRoute.js";
 import cors from 'cors';
 
 const app = express();

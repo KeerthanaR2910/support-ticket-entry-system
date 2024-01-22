@@ -31,7 +31,7 @@ const CreateSupportAgent = () => {
     ]
 
     return (
-        <CreateCard formFields={formFields} onSave={saveSupportAgent} />
+        <CreateCard formFields={formFields} onSave={saveSupportAgent} type={"Agent"}/>
     )
 }
 

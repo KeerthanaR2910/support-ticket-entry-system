@@ -27,7 +27,7 @@ const CreateSupportTicket = () => {
     ]
 
     return (
-        <CreateCard formFields={formFields} onSave={saveSupportTicket} successMessage="You have sucessfully created Ticket with id" errorMessage="Error occured while creating Ticket! Try again"/>
+        <CreateCard formFields={formFields} onSave={saveSupportTicket} type={"Ticket"}/>
     )
 }
 

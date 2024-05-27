@@ -11,4 +11,10 @@ router.get('/', fetchTicketsHandler);
 
 router.post('/resolve/:id', resolveTicketHandler);
 
-export default router;
+// export default router;
+//
+
+const quotes = ["quote1", 'qoute2',"quote3"];
+const randomQuotesHandler = async () =>{
+
+}

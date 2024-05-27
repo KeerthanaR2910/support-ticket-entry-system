@@ -24,58 +24,25 @@ $ npm --version
 ## Project setup
  1. Clone the project 
 ```shell
-https://github.com/KeerthanaR2910/support-ticket-entry-system.git
+git clone https://github.com/KeerthanaR2910/aquera.git
 ```
-2. install packages on frontend
+2. install packages
 ```shell
-cd frontend
 npm install
 ```
-3. install packages on backend
-```shell
-cd backend
-npm install
-```
-4. Add backend url to .env.local
-   1. Create `.env.local` in frontend directory
-   2. Add backend base url to `REACT_APP_SERVICE_BASE_URL` variable
-
 ## Start Application
-### Frontend
-Frontend code will be available in the frontend directory
 In the project directory, you can run:
 
 ```bash
-cd frontend
 npm run start
 ```
 
 This command will start the app in http://localhost:3000 
 
-### Backend
-Backend code will be available in the backend directory
-In the project directory, you can run:
-
-```bash
-cd backend
-npm run dev
-```
-
-This command will start the app in development mode http://localhost:8888.
-The api will reload when you make changes.
-
-
-```bash
-cd backend
-npm run start
-```
-
-This command will start the app in production mode http://localhost:8888.
-Changes would not be reflected immediately on apis
-
-## Technologies used
- 1. React
-2. Node
+## Technologies and Libraries used
+1. React
+2. Tailwind
+3. 
 3. Express js
 4. Mongoose
 5. MongoDb

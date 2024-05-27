@@ -1,13 +1,13 @@
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Header from "./components/Header";
-import CreateSupportAgent from './pages/CreateSupportAgent';
-import ShowSupportTicket from './pages/ShowSupportTickets'
-import CreateSupportTicket from './pages/CreateSupportTicket'
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+// } from "react-router-dom";
+// import Header from "./components/Header";
+// import CreateSupportAgent from './pages/CreateSupportAgent';
+// import ShowSupportTicket from './pages/ShowSupportTickets'
+// import CreateSupportTicket from './pages/CreateSupportTicket'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,4 +29,8 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
